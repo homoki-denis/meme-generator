@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 const Meme = () => {
   const [meme, setMeme] = useState({
@@ -8,12 +8,35 @@ const Meme = () => {
       "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQoyL9Frn6VLTgjkfge6OG_MLqVQPxQZarI8g&usqp=CAU",
   });
 
+  const [allMemes, setAllMemes] = useState("");
+  //   console.log(allMemes);
+  useEffect(() => {
+    fetch("https://api.imgflip.com/get_memes")
+      .then((res) => res.json())
+      .then((data) => setAllMemes(data));
+  }, []);
+
+  //   console.log(allMemes);
+
   const memeInput = (e) => {
     const { value, name } = e.target;
     setMeme((prevMeme) => {
       return {
         ...prevMeme,
         [name]: value,
+      };
+    });
+  };
+
+  const newMeme = (e) => {
+    e.preventDefault();
+    const randomNumber = Math.floor(Math.random() * allMemes.data.memes.length);
+    const url = allMemes.data.memes[randomNumber].url;
+
+    setMeme((prevMemes) => {
+      return {
+        ...prevMemes,
+        testImg: url,
       };
     });
   };
@@ -35,7 +58,7 @@ const Meme = () => {
             onChange={memeInput}
           />
         </div>
-        <button>Get A New Meme Image 🖼</button>
+        <button onClick={newMeme}>Get A New Meme Image 🖼</button>
         <div className="meme-image">
           <img src={meme.testImg} alt="meme" />
           <h1 className="top-text">{meme.topText}</h1>
