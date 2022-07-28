@@ -4,7 +4,7 @@ const Meme = () => {
   const [meme, setMeme] = useState({
     topText: "",
     bottomText: "",
-    testImg:
+    imgUrl:
       "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQoyL9Frn6VLTgjkfge6OG_MLqVQPxQZarI8g&usqp=CAU",
   });
 
@@ -36,7 +36,7 @@ const Meme = () => {
     setMeme((prevMemes) => {
       return {
         ...prevMemes,
-        testImg: url,
+        imgUrl: url,
       };
     });
   };
@@ -50,17 +50,19 @@ const Meme = () => {
             value={meme.topText}
             name="topText"
             onChange={memeInput}
+            placeholder="Top Text"
           />
           <input
             type="text"
             value={meme.bottomText}
             name="bottomText"
             onChange={memeInput}
+            placeholder="Bottom Text"
           />
         </div>
         <button onClick={newMeme}>Get A New Meme Image 🖼</button>
         <div className="meme-image">
-          <img src={meme.testImg} alt="meme" />
+          <img src={meme.imgUrl} alt="meme" />
           <h1 className="top-text">{meme.topText}</h1>
           <h1 className="bottom-text">{meme.bottomText}</h1>
         </div>
