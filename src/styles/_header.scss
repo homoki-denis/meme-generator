@@ -1,0 +1,14 @@
+.header {
+  background: linear-gradient(90deg, #672280 1.18%, #a626d3 100%);
+  width: 100%;
+  height: 65px;
+  display: flex;
+  align-items: center;
+  color: #fff;
+
+  .trollface {
+    height: 100%;
+    padding: 0.5rem;
+    margin: 0 0 0 1rem;
+  }
+}
